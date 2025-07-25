@@ -1,9 +1,6 @@
 import * as vscode from 'vscode';
-import { exec } from 'child_process';
-import { promisify } from 'util';
 import * as path from 'path';
-
-const execAsync = promisify(exec);
+import { execAsync } from '../utils/execAsync';
 
 /**
  * Git分支管理器

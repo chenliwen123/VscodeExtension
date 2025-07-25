@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { JsxComponentGenerator } from './components/JsxComponentGenerator';
 import { GitBranchManager } from './components/GitBranchManager';
+import { DeployManager } from './components/DeployManager';
 
 export function activate(context: vscode.ExtensionContext) {
     const extensionPath = context.extensionPath; // 获取插件的安装地址
@@ -21,11 +22,17 @@ export function activate(context: vscode.ExtensionContext) {
     const gitBranchManager = new GitBranchManager();
     const gitCommands = gitBranchManager.registerCommands();
 
+    // 部署管理器
+    const deployManager = new DeployManager();
+    const deployCommands = deployManager.registerCommands();
+
     // 注册所有命令
     context.subscriptions.push(
         helloWorldCommand,
         jsxComponentCommand,
         ...gitCommands,
-        gitBranchManager // 确保在扩展停用时释放资源
+        ...deployCommands,
+        gitBranchManager, // 确保在扩展停用时释放资源
+        deployManager
     );
 }

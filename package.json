@@ -2,7 +2,7 @@
   "name": "chenliwen-dev-tools",
   "displayName": "ChenLiwen Dev Tools",
   "description": "强大的VSCode开发工具扩展，提供JSX组件快速生成和Git分支自动合并功能",
-  "version": "0.1.5",
+  "version": "0.2.2",
   "publisher": "chenliwen",
   "author": {
     "name": "chenliwen",
@@ -35,6 +35,21 @@
     "vscode": "^1.89.0"
   },
   "contributes": {
+    "configuration": {
+      "title": "ChenLiwen Dev Tools",
+      "properties": {
+        "chenliwen-dev-tools.deployApiUrl": {
+          "type": "string",
+          "default": "http://10.52.70.10:510",
+          "description": "部署API服务器地址"
+        },
+        "chenliwen-dev-tools.authToken": {
+          "type": "string",
+          "default":"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNDEwNzYyNjIxQHFxLmNvbSIsImNyZWF0ZWQiOjE3NTM0MDMxMzUzMjEsImlkbWlkIjpudWxsLCJleHAiOjE3NTQwMDc5MzUsInVwa2lkIjoiMTc2NDgxNzg2NDM4MzQyMjQ2NSJ9.ge_WMmPOrmgC5NsmyoQ-W4b2RIT2GHVZF5qDVqC2a6gWdtWmEuevlgGL7opNpQtKH3UxSL7brqz6F5NyKZQ8Yw",
+          "description": "认证Token (将安全存储)"
+        }
+      }
+    },
     "snippets": [
       {
         "language": "javascript",
@@ -58,6 +73,12 @@
         {
           "command": "extension.autoMergeBranch",
           "when": "gitOpenRepositoryCount != 0"
+        },
+        {
+          "command": "extension.deploy"
+        },
+        {
+          "command": "extension.deployStatus"
         }
       ],
       "scm/title": [
@@ -96,6 +117,18 @@
         "title": "🚀 自动合并当前分支到dev和sit",
         "category": "Git",
         "icon": "$(git-merge)"
+      },
+      {
+        "command": "extension.deploy",
+        "title": "🚀 SIT环境部署",
+        "category": "Deploy",
+        "icon": "$(rocket)"
+      },
+      {
+        "command": "extension.deployStatus",
+        "title": "📊 部署状态管理",
+        "category": "Deploy",
+        "icon": "$(list-unordered)"
       }
     ]
   },
